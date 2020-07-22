@@ -1,5 +1,5 @@
 # TF2 Set Max Health Plugin.
-------------
+
 ## ConVars for plugin "setclassmaxhealth.smx"
 
 Sets whether the plugin is enabled.
