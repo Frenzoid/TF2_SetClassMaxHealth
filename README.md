@@ -19,6 +19,12 @@ Default: "0.5"
 - sm_mhincrement "0.5"
 ---
 
+Filters teams, 0: apply to all teams, 1: Only RED, 2: Only Blue
+
+Default: "0"
+- sm_mhteam "0"
+---
+
 Sets Demomans max health
 
 Default: "200"
