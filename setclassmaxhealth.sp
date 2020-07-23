@@ -60,8 +60,8 @@ public OnPluginStart()
 // Executed when the player event "player_spawn" gets triggered.
 public Action:Event_PlayerRespawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    // If the plugin is off, just continue.
-    //  return plugin didn't change gameplay state.
+    // If the plugin is off ("sm_mhenabled" is set to "0"), return, and therefore, do nothing.
+    //  return Plugin_Continue, since plugin didn't change gameplay state.
     if (!GetConVarBool(g_cvHEnabled))
             return Plugin_Continue;
 
@@ -80,7 +80,7 @@ public Action:OnGetMaxHealth(client, &maxhealth)
     new TFTeam:PlayerTeam = TFTeam:GetClientTeam(client);
     
     // If the player is from any other team that g_cvHTeam is setted to, dont do anything.
-    //  Return plugin didn't change gameplay state.
+    //  Return Plugin_Continue since plugin didn't change gameplay state.
     if ((GetConVarInt(g_cvHTeam) == 1 && PlayerTeam != TFTeam_Red) || (GetConVarInt(g_cvHTeam) == 2 && PlayerTeam != TFTeam_Blue))
         return Plugin_Continue;
 
@@ -138,6 +138,6 @@ public Action:OnGetMaxHealth(client, &maxhealth)
         }
     }
 
-    // Return plugin changed gameplay state.
+    // Return Plugin_Changed since plugin changed the gameplay state.
     return Plugin_Changed;
 }
