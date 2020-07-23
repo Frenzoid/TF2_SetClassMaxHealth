@@ -60,7 +60,7 @@ public OnPluginStart()
 // Executed when the player event "player_spawn" gets triggered.
 public Action:Event_PlayerRespawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    // If the plugin is off ("sm_mhenabled" is set to "0"), return, and therefore, do nothing.
+    // If the plugin is off ("sm_mhenabled" is set to "0"), return, and therefore, do nothing else.
     //  return Plugin_Continue, since plugin didn't change gameplay state.
     if (!GetConVarBool(g_cvHEnabled))
             return Plugin_Continue;
