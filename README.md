@@ -9,8 +9,8 @@
 
 cvar name, default value, description.
 
-- "sm_mhenabled", "1", "Sets whether the plugin is enabled."
-- "sm_mhteam", "1", "0: apply to all teams, 1: Only RED, 2: Only Blue"
+- "sm_mhenabled", "1", "Enables / Disables the plugin (`sm plugins reload` is needed)."
+- "sm_mhteam", "1", "0: apply to all teams, 1: Only RED Team, 2: Only BLUE Team"
 - "sm_mhmode", "0", "Sets plugins mode, 0: sm_mhincrement = +% of the default max health for each class, 1: Custom health value for each class from each owns class cvar"
 - "sm_mhincrement", "0.2", "% incremented on the default maxhealth to all classes"
 - "sm_mhsoldier", "200", "Sets Soldiers max health"
