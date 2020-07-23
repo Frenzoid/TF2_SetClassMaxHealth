@@ -1,6 +1,6 @@
 # TF2 Set class max health 
 
-- This is a plugin that i needed to do, since apparently noone in 17 years tought that changing the default max health for each class specifically would be of use at any time on tf2's long living history of sourcemodding.
+- This is a plugin that i needed to do, since apparently no one in 11 years tought that changing the default max health for each class specifically would be of use at any time on tf2's long living history of sourcemodding.
 
 ## How to install.
 - Download this repository (right top green button), and copy `setclassmaxhealth.smx` on your plugins folder.
