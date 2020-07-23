@@ -1,4 +1,5 @@
 #include <sourcemod>
+#include <sdkhooks>
 #include <tf2>
 #include <tf2_stocks>
  
@@ -13,6 +14,7 @@ public Plugin:myinfo =
  
 new Handle:g_cvHEnabled;
 new Handle:g_cvHMode;
+new Handle:g_cvHTeam;
 new Handle:g_cvHIncrement;
 
 new Handle:g_cvHSoldier;
@@ -29,6 +31,8 @@ public OnPluginStart()
 {       
     g_cvHEnabled = CreateConVar("sm_mhenabled", "1", "Sets whether the plugin is enabled.");
     g_cvHMode = CreateConVar("sm_mhmode", "0", "Sets plugins mode, 0: sm_mhincrement = +% of the default max health for each class for everyone, 1: Custom health value for each class from each ones cvar");
+    
+    g_cvHTeam = CreateConVar("sm_mhteam", "0", "0: apply to all teams, 1: Only RED, 2: Only Blue");
 
     g_cvHIncrement = CreateConVar("sm_mhincrement", "0.5", "% incremented on the default maxhealth to all classes");
 
@@ -44,7 +48,6 @@ public OnPluginStart()
 
     AutoExecConfig(true, "setclassmaxhealth");
     HookEvent("player_spawn", Event_PlayerRespawn);
-    HookEvent("player_death", Event_PlayerDeath);
 }
  
  
@@ -54,16 +57,26 @@ public Action:Event_PlayerRespawn(Handle:event, const String:name[], bool:dontBr
             return Plugin_Continue;
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    new TFClassType:PlayerClass = TF2_GetPlayerClass(client);
- 
-    new resource = GetPlayerResourceEntity();
-    new current_maxHealth = GetEntProp(resource, Prop_Send, "m_iMaxHealth", _, client)
 
+    SDKHook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
+ 
+    return Plugin_Continue;
+}
+
+public Action:OnGetMaxHealth(client, &maxhealth) 
+{
+    new TFClassType:PlayerClass = TF2_GetPlayerClass(client);
+    new TFTeam:PlayerTeam = GetClientTeam(client);
+    
+    // If the player is from any other team that g_cvHTeam is setted to, dont do anything.
+    if ((GetConVarInt(g_cvHTeam) == 1 && PlayerTeam != TFTeam_Red) || (GetConVarInt(g_cvHTeam) == 2 && PlayerTeam != TFTeam_Blue))
+        return Plugin_Continue;
+
+    // Depending on the mode, set everyones max hp depending on g_cvHIncrement's %, or set each class specifically its max health.
     if (!GetConVarBool(g_cvHMode))
     {
-        new Float:new_maxHealth = (float(current_maxHealth) * GetConVarFloat(g_cvHIncrement)) + float(current_maxHealth); // Max HP + (sm_mhincrement * Max HP)
-        SetEntProp(client, Prop_Data, "m_iMaxHealth", RoundFloat(new_maxHealth));   // Sets max health.
-        SetEntityHealth(client, RoundFloat(new_maxHealth));                         // Sets health to max.
+        new Float:new_maxHealth = (float(maxhealth) * GetConVarFloat(g_cvHIncrement)) + float(maxhealth); // Max HP + (sm_mhincrement * Max HP)
+        maxhealth = RoundFloat(new_maxHealth);
     } 
     else
     {
@@ -71,57 +84,42 @@ public Action:Event_PlayerRespawn(Handle:event, const String:name[], bool:dontBr
         {
             case TFClass_Heavy:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHHeavy));
-		        SetEntityHealth(client, GetConVarInt(g_cvHHeavy));
+		        maxhealth = GetConVarInt(g_cvHHeavy);
             }
             case TFClass_Soldier:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHSoldier));
-		        SetEntityHealth(client, GetConVarInt(g_cvHSoldier));
+		        maxhealth = GetConVarInt(g_cvHSoldier);
             }
             case TFClass_Pyro:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHPyro));
-		        SetEntityHealth(client, GetConVarInt(g_cvHPyro));
+		        maxhealth = GetConVarInt(g_cvHPyro);
             }
             case TFClass_Spy:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHSpy));
-		        SetEntityHealth(client, GetConVarInt(g_cvHSpy));
+		        maxhealth = GetConVarInt(g_cvHSpy);
             }
             case TFClass_Sniper:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHSniper));
-		        SetEntityHealth(client, GetConVarInt(g_cvHSniper));
+		        maxhealth = GetConVarInt(g_cvHSniper);
             }
             case TFClass_DemoMan:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHDemoman));
-		        SetEntityHealth(client, GetConVarInt(g_cvHDemoman));
+		        maxhealth = GetConVarInt(g_cvHDemoman);
             }
             case TFClass_Scout:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHScout));
-		        SetEntityHealth(client, GetConVarInt(g_cvHScout));
+		        maxhealth = GetConVarInt(g_cvHScout);
             }
             case TFClass_Engineer:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHEngineer));
-		        SetEntityHealth(client, GetConVarInt(g_cvHEngineer));
+		        maxhealth = GetConVarInt(g_cvHEngineer);
             }
             case TFClass_Medic:
             {
-                SetEntProp(client, Prop_Data, "m_iMaxHealth", GetConVarInt(g_cvHMedic));
-		        SetEntityHealth(client, GetConVarInt(g_cvHMedic));
+		        maxhealth = GetConVarInt(g_cvHMedic);
             }
         }
     }
- 
+
     return Plugin_Continue;
-}
-
-
-public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) 
-{
-
 }
