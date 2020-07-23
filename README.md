@@ -1,79 +1,33 @@
-# TF2 Set Max Health Plugin.
+# TF2 Set class max health 
 
-## ConVars for plugin "setclassmaxhealth.smx"
+- This is a plugin that i needed to do, since apparently noone in 17 years tought that changing the default max health for each class specifically would be of use at any time on tf2's long living history of sourcemodding.
 
-Sets whether the plugin is enabled.
+## How to install.
+- Download this repository (right top green button), and copy `setclassmaxhealth.smx` on your plugins folder.
 
-Default: "1"
-- sm_mhenabled "1"
----
-Sets plugins mode, 0: % of the default max health for everyone, 1: Custom health for each class from cvar
+## CVars:
 
-Default: "0"
-- sm_mhmode "0"
----
+cvar name, default value, description.
 
-Sets the % incremented on the default maxhealth to all classes
+- "sm_mhenabled", "1", "Sets whether the plugin is enabled."
+- "sm_mhteam", "1", "0: apply to all teams, 1: Only RED, 2: Only Blue"
+- "sm_mhmode", "0", "Sets plugins mode, 0: sm_mhincrement = +% of the default max health for each class, 1: Custom health value for each class from each owns class cvar"
+- "sm_mhincrement", "0.2", "% incremented on the default maxhealth to all classes"
+- "sm_mhsoldier", "200", "Sets Soldiers max health"
+- "sm_mhpyro", "200", "Sets Pyros max health"
+- "sm_mhspy", "200", "Sets Spys  max health"
+- "sm_mhdemoman", "200", "Sets Demomans max health"
+- "sm_mhsniper", "200", "Sets Sniers max health"
+- "sm_mhengineer", "200", "Sets Engineers max health"
+- "sm_mhheavy", "200", "Sets Heavys max health"
+- "sm_mhscout", "200", "Sets Scouts max health"
+- "sm_mhmedic", "200", "Sets Medics max health"
 
-Default: "0.5"
-- sm_mhincrement "0.5"
----
 
-Filters teams, 0: apply to all teams, 1: Only RED, 2: Only Blue
+## Config file:
+- Config file located at `cfg/sourcemod/setclassmaxhealth.cfg`.
 
-Default: "0"
-- sm_mhteam "0"
----
+## Current known bugs:
+- Ovearheals don't work.
 
-Sets Demomans max health
-
-Default: "200"
-- sm_mhdemoman "200"
----
-
-Sets Engineers max health
-
-Default: "200"
-- sm_mhengineer "200"
----
-
-Sets Heavys max health
-
-Default: "200"
-- sm_mhheavy "200"
----
-
-Sets Medics max health
-
-Default: "200"
-- sm_mhmedic "200"
----
-
-Sets Pyros max health
-
-Default: "200"
-- sm_mhpyro "200"
----
-
-Sets Scouts max health
-
-Default: "200"
-- sm_mhscout "200"
----
-
-Sets Sniers max health
-
-Default: "200"
-- sm_mhsniper "200"
----
-
-Sets Soldiers max health
-
-Default: "200"
-- sm_mhsoldier "200"
----
-
-Sets Spys  max health
-
-Default: "200"
-- sm_mhspy "200"
+## This plugin is not fully tested, if you find any issues, report it to [ISSUES](https://github.com/Frenzoid/TF2_SetClassMaxHealth/issues) or [send me a private message via Steam](https://steamcommunity.com/id/MrFren/).
