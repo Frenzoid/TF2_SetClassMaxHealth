@@ -53,20 +53,18 @@ public OnPluginStart()
  
 public Action:Event_PlayerRespawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if (GetConVarBool(g_cvHEnabled))
+    if (!GetConVarBool(g_cvHEnabled))
             return Plugin_Continue;
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
 
-    SDKHook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
- 
-    return Plugin_Continue;
+    return Action:SDKHook(client, SDKHook_GetMaxHealth, OnGetMaxHealth);
 }
 
 public Action:OnGetMaxHealth(client, &maxhealth) 
 {
     new TFClassType:PlayerClass = TF2_GetPlayerClass(client);
-    new TFTeam:PlayerTeam = GetClientTeam(client);
+    new TFTeam:PlayerTeam = TFTeam:GetClientTeam(client);
     
     // If the player is from any other team that g_cvHTeam is setted to, dont do anything.
     if ((GetConVarInt(g_cvHTeam) == 1 && PlayerTeam != TFTeam_Red) || (GetConVarInt(g_cvHTeam) == 2 && PlayerTeam != TFTeam_Blue))
@@ -121,5 +119,5 @@ public Action:OnGetMaxHealth(client, &maxhealth)
         }
     }
 
-    return Plugin_Continue;
+    return Plugin_Changed;
 }
