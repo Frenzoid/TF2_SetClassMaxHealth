@@ -11,17 +11,17 @@ cvar name, default value, description.
 
 - "sm_mhenabled", "1", "Enables / Disables the plugin (`sm plugins reload` is needed)."
 - "sm_mhteam", "1", "0: apply to all teams, 1: Only RED Team, 2: Only BLUE Team"
-- "sm_mhmode", "0", "Sets plugins mode, 0: sm_mhincrement = +% of the default max health for each class, 1: Custom health value for each class from each owns class cvar"
+- "sm_mhmode", "0", "Sets plugins mode, 0: sm_mhincrement = additive value to the default max health for each class for everyone, 1: Custom additive health value for each class from each ones cvar"
 - "sm_mhincrement", "0.2", "% incremented on the default maxhealth to all classes"
-- "sm_mhsoldier", "200", "Sets Soldiers max health"
-- "sm_mhpyro", "200", "Sets Pyros max health"
-- "sm_mhspy", "200", "Sets Spys  max health"
-- "sm_mhdemoman", "200", "Sets Demomans max health"
-- "sm_mhsniper", "200", "Sets Sniers max health"
-- "sm_mhengineer", "200", "Sets Engineers max health"
-- "sm_mhheavy", "200", "Sets Heavys max health"
-- "sm_mhscout", "200", "Sets Scouts max health"
-- "sm_mhmedic", "200", "Sets Medics max health"
+- "sm_mhsoldier", "200", "Health to increase Soldiers max health"
+- "sm_mhpyro", "200", "Health to increase Pyros max health"
+- "sm_mhspy", "200", "Health to increase Spys  max health"
+- "sm_mhdemoman", "200", "Health to increase Demomans max health"
+- "sm_mhsniper", "200", "Health to increase Sniers max health"
+- "sm_mhengineer", "200", "Health to increase Engineers max health"
+- "sm_mhheavy", "200", "Health to increase Heavys max health"
+- "sm_mhscout", "200", "Health to increase Scouts max health"
+- "sm_mhmedic", "200", "Health to increase Medics max health"
 
 
 ## Config file:
