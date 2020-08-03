@@ -28,6 +28,6 @@ cvar name, default value, description.
 - Config file located at `cfg/sourcemod/setclassmaxhealth.cfg`.
 
 ## Current known bugs:
-- Ovearheals don't work.
+none
 
 ## This plugin is not fully tested, if you find any issues, report it to [ISSUES](https://github.com/Frenzoid/TF2_SetClassMaxHealth/issues) or [send me a private message via Steam](https://steamcommunity.com/id/MrFren/).
